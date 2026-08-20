@@ -121,7 +121,8 @@ function Index() {
           setDir(next);
         }
         const d = DELTAS[dirRef.current];
-        const head = { x: prev[0].x + d.x, y: prev[0].y + d.y };
+        const cur = prev[0]!;
+        const head = { x: cur.x + d.x, y: cur.y + d.y };
         if (
           head.x < 0 ||
           head.y < 0 ||
@@ -174,13 +175,13 @@ function Index() {
       <div
         className="relative touch-none rounded-xl border border-border bg-board p-2 shadow-lg"
         onTouchStart={(e) => {
-          const t = e.touches[0];
+          const t = e.touches[0]!;
           touchStart.current = { x: t.clientX, y: t.clientY };
         }}
         onTouchEnd={(e) => {
           const s = touchStart.current;
           if (!s) return;
-          const t = e.changedTouches[0];
+          const t = e.changedTouches[0]!;
           const dx = t.clientX - s.x;
           const dy = t.clientY - s.y;
           if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;
